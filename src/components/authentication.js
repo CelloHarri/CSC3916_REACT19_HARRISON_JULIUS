@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; // Import useSelector and useDispatch
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Login from './login';
 import Register from './register';
 import { logoutUser } from '../actions/authActions';
@@ -7,11 +8,17 @@ import { Nav, Button } from 'react-bootstrap';
 
 const Authentication = () => {
   const [activeTab, setActiveTab] = useState('login');
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // Retrieve Redux state values
   const loggedIn = useSelector((state) => state.auth.loggedIn);
   const username = useSelector((state) => state.auth.username);
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigate('/movielist');
+    }
+  }, [loggedIn, navigate]);
 
   // Switch tabs when user selects a tab
   const handleSelect = (selectedKey) => {
