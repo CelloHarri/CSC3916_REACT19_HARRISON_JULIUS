@@ -54,7 +54,7 @@ export function submitRegister(data) {
         }).then((response) => {
             if (!response.ok) {
                 return response.json().then(data => {
-                    throw new Error(data.msg || 'Register failed');
+                    throw new Error(data.msg || data.message || 'Register failed');
                 });
             }
             return response.json();
