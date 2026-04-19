@@ -64,7 +64,7 @@ const MovieDetail = () => {
             <thead>
               <tr>
                 <th>Username</th>
-                <th>Comment</th>
+                <th>Review</th>
                 <th>Rating</th>
                 <th></th>
               </tr>
