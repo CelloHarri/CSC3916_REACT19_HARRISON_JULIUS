@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { fetchMovie } from '../actions/movieActions';
+import React, { useEffect, useState } from 'react';
+import { fetchMovie, submitReview } from '../actions/movieActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, ListGroup, ListGroupItem, Image } from 'react-bootstrap';
+import { Form, Button, Card, ListGroup, ListGroupItem, Image } from 'react-bootstrap';
 import { BsStarFill } from 'react-icons/bs';
 import { useParams } from 'react-router-dom'; // Import useParams
 
@@ -12,6 +12,12 @@ const MovieDetail = () => {
   const loading = useSelector(state => state.movie.loading); // Assuming you have a loading state in your reducer
   const error = useSelector(state => state.movie.error); // Assuming you have an error state in your reducer
 
+  const [review, setReview] = useState({ rating: '', review: '' });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(submitReview({ movieId, ...review }));
+  };
 
   useEffect(() => {
     dispatch(fetchMovie(movieId));
@@ -51,16 +57,36 @@ const MovieDetail = () => {
             </h4>
           </ListGroupItem>
         </ListGroup>
-        {/* HW4: Reviews section - uncomment when reviews are added to the API*/
-          <Card.Body className="card-body bg-white">
-            {(selectedMovie.reviews || []).map((review, i) => (
-              <p key={i}>
-                <b>{review.username}</b>&nbsp; {review.review} &nbsp; <BsStarFill />{' '}
-                {review.rating}
-              </p>
-            ))}
-          </Card.Body>
-        }
+        <Card.Body className="card-body bg-white">
+          {(selectedMovie.reviews || []).map((review, i) => (
+            <p key={i}>
+              <b>{review.username}</b>&nbsp; {review.review} &nbsp; <BsStarFill />{' '}
+              {review.rating}
+            </p>
+          ))}
+        </Card.Body>
+        <Card.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label>Rating (1-5)</Form.Label>
+              <Form.Control
+                type="number" min="1" max="5"
+                value={review.rating}
+                onChange={(e) => setReview({ ...review, rating: e.target.value })}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Review</Form.Label>
+              <Form.Control
+                as="textarea"
+                value={review.review}
+                onChange={(e) => setReview({ ...review, review: e.target.value })}
+              />
+            </Form.Group>
+            <Button type="submit" className="mt-2">Submit Review</Button>
+          </Form>
+        </Card.Body>
+
       </Card>
     );
   };
