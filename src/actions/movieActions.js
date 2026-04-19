@@ -90,6 +90,8 @@ export function submitReview(reviewData) {
         }).then((response) => {
             if (!response.ok) throw Error(response.statusText);
             return response.json();
+        }).then(() => {
+            dispatch(fetchMovie(reviewData.movieId));
         }).catch((e) => console.log(e))
     }
 }
