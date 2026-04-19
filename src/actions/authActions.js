@@ -27,9 +27,11 @@ export function submitLogin(data) {
             mode: 'cors'
         }).then((response) => {
             if (!response.ok) {
-                throw Error(response.statusText);
+                return response.json().then(data => {
+                    throw new Error(data.msg || 'Login failed');
+                });
             }
-            return response.json()
+            return response.json();
         }).then((res) => {
             localStorage.setItem('username', data.username);
             localStorage.setItem('token', res.token);
@@ -51,11 +53,20 @@ export function submitRegister(data) {
             mode: 'cors'
         }).then((response) => {
             if (!response.ok) {
-                throw Error(response.statusText);
+                return response.json().then(data => {
+                    throw new Error(data.msg || 'Register failed');
+                });
             }
-            return response.json()
+            return response.json();
         }).then((res) => {
             dispatch(submitLogin(data));
+        }).then((response) => {
+            if (response && !response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.msg || 'Login failed');
+                });
+            }
+            return response.json();
         }).catch((e) => dispatch({ type: actionTypes.AUTH_ERROR, message: e.message }))
     }
 }
