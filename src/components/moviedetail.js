@@ -68,15 +68,16 @@ const MovieDetail = () => {
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group>
-              <Form.Label>Rating (1-5)</Form.Label>
+              <Form.Label className="text-white">Rating (1-5)</Form.Label>
               <Form.Control
                 type="number" min="1" max="5"
                 value={review.rating}
                 onChange={(e) => setReview({ ...review, rating: e.target.value })}
+                style={{ width: '80px' }}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Review</Form.Label>
+              <Form.Label className="text-white">Review</Form.Label>
               <Form.Control
                 as="textarea"
                 value={review.review}
