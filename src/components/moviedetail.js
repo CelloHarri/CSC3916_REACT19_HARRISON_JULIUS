@@ -60,22 +60,36 @@ const MovieDetail = () => {
           </ListGroupItem>
         </ListGroup>
         <Card.Body className="card-body bg-white">
-          {(selectedMovie.reviews || []).map((review, i) => (
-            <p key={i}>
-              <b>{review.username}</b>&nbsp; {review.review} &nbsp; <BsStarFill />{' '}
-              {review.rating}
-              {review.username === loggedInUser && (
-                <Button
-                  variant="danger"
-                  size="sm"
-                  className="ms-2"
-                  onClick={() => dispatch(deleteReview(review._id, movieId))}
-                >
-                  Delete
-                </Button>
-              )}
-            </p>
-          ))}
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Comment</th>
+                <th>Rating</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {(selectedMovie.reviews || []).map((review, i) => (
+                <tr key={i}>
+                  <td><b>{review.username}</b></td>
+                  <td>{review.review}</td>
+                  <td><BsStarFill /> {review.rating}</td>
+                  <td>
+                    {review.username === loggedInUser && (
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => dispatch(deleteReview(review._id, movieId))}
+                      >
+                        Delete
+                      </Button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </Card.Body>
       </Card>
     );
