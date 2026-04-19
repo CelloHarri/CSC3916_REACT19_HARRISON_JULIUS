@@ -88,7 +88,7 @@ export function submitReview(reviewData) {
             }),
             mode: 'cors'
         }).then((response) => {
-            if (!response.ok) throw Error(responce.statusText);
+            if (!response.ok) throw Error(response.statusText);
             return response.json();
         }).catch((e) => console.log(e))
     }
