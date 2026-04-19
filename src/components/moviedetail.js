@@ -65,6 +65,14 @@ const MovieDetail = () => {
             </p>
           ))}
         </Card.Body>
+      </Card>
+    );
+  };
+
+  return (
+    <>
+      <DetailInfo />
+      {selectedMovie && (
         <Card.Body style={{ textAlign: 'left' }}>
           <Form onSubmit={handleSubmit} className="text-start">
             <Form.Group>
@@ -87,12 +95,9 @@ const MovieDetail = () => {
             <Button type="submit" className="mt-2">Submit Review</Button>
           </Form>
         </Card.Body>
-
-      </Card>
-    );
-  };
-
-  return <DetailInfo />;
+      )}
+    </>
+  );
 };
 
 
