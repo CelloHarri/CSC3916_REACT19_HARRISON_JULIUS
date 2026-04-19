@@ -65,7 +65,7 @@ const MovieDetail = () => {
             </p>
           ))}
         </Card.Body>
-        <Card.Body>
+        <Card.Body style={{ textAlign: 'left' }}>
           <Form onSubmit={handleSubmit} className="text-start">
             <Form.Group>
               <Form.Label className="text-white">Rating (1-5)</Form.Label>
