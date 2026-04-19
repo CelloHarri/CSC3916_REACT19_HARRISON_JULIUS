@@ -51,16 +51,16 @@ const MovieDetail = () => {
             </h4>
           </ListGroupItem>
         </ListGroup>
-        {/* HW4: Reviews section - uncomment when reviews are added to the API
-        <Card.Body className="card-body bg-white">
-          {(selectedMovie.reviews || []).map((review, i) => (
-            <p key={i}>
-              <b>{review.username}</b>&nbsp; {review.review} &nbsp; <BsStarFill />{' '}
-              {review.rating}
-            </p>
-          ))}
-        </Card.Body>
-        */}
+        {/* HW4: Reviews section - uncomment when reviews are added to the API*/
+          <Card.Body className="card-body bg-white">
+            {(selectedMovie.reviews || []).map((review, i) => (
+              <p key={i}>
+                <b>{review.username}</b>&nbsp; {review.review} &nbsp; <BsStarFill />{' '}
+                {review.rating}
+              </p>
+            ))}
+          </Card.Body>
+        }
       </Card>
     );
   };
