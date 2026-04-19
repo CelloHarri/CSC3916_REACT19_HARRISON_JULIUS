@@ -16,6 +16,7 @@ const MovieDetail = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('handleSubmit called', { movieId, review });
     dispatch(submitReview({ movieId, ...review }));
   };
 
