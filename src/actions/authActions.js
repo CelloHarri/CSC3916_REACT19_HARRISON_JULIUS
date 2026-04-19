@@ -35,7 +35,7 @@ export function submitLogin(data) {
             localStorage.setItem('token', res.token);
 
             dispatch(userLoggedIn(data.username));
-        }).catch((e) => console.log(e));
+        }).catch((e) => dispatch({ type: actionTypes.AUTH_ERROR, message: e.message }))
     }
 }
 
@@ -56,7 +56,7 @@ export function submitRegister(data) {
             return response.json()
         }).then((res) => {
             dispatch(submitLogin(data));
-        }).catch((e) => console.log(e));
+        }).catch((e) => dispatch({ type: actionTypes.AUTH_ERROR, message: e.message }))
     }
 }
 

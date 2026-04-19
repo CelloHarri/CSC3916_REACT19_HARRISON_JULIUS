@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { submitRegister } from '../actions/authActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 
 function Register() {
@@ -11,6 +11,7 @@ function Register() {
     });
 
     const dispatch = useDispatch();
+    const error = useSelector(state => state.auth.error);
 
     const updateDetails = (event) => {
         setDetails({
@@ -41,6 +42,7 @@ function Register() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control onChange={updateDetails} value={details.password} autoComplete="current-password" type="password" placeholder="Password" />
                 </Form.Group>
+                {error && <div className="alert alert-danger mt-2">{error}</div>}
                 <Button type="submit">Register</Button>
             </Form>
         </div>

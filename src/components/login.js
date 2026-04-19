@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { submitLogin } from '../actions/authActions';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 
 function Login() {
@@ -10,6 +11,7 @@ function Login() {
   });
 
   const dispatch = useDispatch();
+  const error = useSelector(state => state.auth.error)
 
   const updateDetails = (event) => {
     setDetails({
@@ -47,6 +49,7 @@ function Login() {
             onChange={updateDetails}
           />
         </Form.Group>
+        {error && <div className="alert alert-danger mt-2">{error}</div>}
         <Button type="submit">Sign in</Button> {/* Use type="submit" */}
       </Form>
     </div>
