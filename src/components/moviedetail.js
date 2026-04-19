@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchMovie, submitReview } from '../actions/movieActions';
+import { fetchMovie, submitReview, deleteReview } from '../actions/movieActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Card, ListGroup, ListGroupItem, Image } from 'react-bootstrap';
 import { BsStarFill } from 'react-icons/bs';
@@ -9,8 +9,9 @@ const MovieDetail = () => {
   const dispatch = useDispatch();
   const { movieId } = useParams(); // Get movieId from URL parameters
   const selectedMovie = useSelector(state => state.movie.selectedMovie);
-  const loading = useSelector(state => state.movie.loading); // Assuming you have a loading state in your reducer
-  const error = useSelector(state => state.movie.error); // Assuming you have an error state in your reducer
+  const loading = useSelector(state => state.movie.loading);
+  const error = useSelector(state => state.movie.error);
+  const loggedInUser = localStorage.getItem('username');
 
   const [review, setReview] = useState({ rating: '', review: '' });
 
@@ -63,6 +64,16 @@ const MovieDetail = () => {
             <p key={i}>
               <b>{review.username}</b>&nbsp; {review.review} &nbsp; <BsStarFill />{' '}
               {review.rating}
+              {review.username === loggedInUser && (
+                <Button
+                  variant="danger"
+                  size="sm"
+                  className="ms-2"
+                  onClick={() => dispatch(deleteReview(review._id, movieId))}
+                >
+                  Delete
+                </Button>
+              )}
             </p>
           ))}
         </Card.Body>

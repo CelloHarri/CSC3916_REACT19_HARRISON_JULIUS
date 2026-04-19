@@ -93,3 +93,22 @@ export function submitReview(reviewData) {
         }).catch((e) => console.log(e))
     }
 }
+
+export function deleteReview(reviewId, movieId) {
+    return dispatch => {
+        return fetch(`${env.REACT_APP_API_URL}/reviews/${reviewId}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+            mode: 'cors'
+        }).then((response) => {
+            if (!response.ok) throw Error(response.statusText);
+            return response.json();
+        }).then(() => {
+            dispatch(fetchMovie(movieId));
+        }).catch((e) => console.log(e));
+    }
+}
