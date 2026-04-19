@@ -76,7 +76,7 @@ const MovieDetail = () => {
         <Card.Body style={{ textAlign: 'left' }}>
           <Form onSubmit={handleSubmit} className="text-start">
             <Form.Group>
-              <Form.Label className="text-white">Rating (1-5)</Form.Label>
+              <Form.Label className="text-gray">Rating (1-5)</Form.Label>
               <Form.Control
                 type="number" min="1" max="5"
                 value={review.rating}
@@ -85,7 +85,7 @@ const MovieDetail = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label className="text-white">Review</Form.Label>
+              <Form.Label className="text-gray">Review</Form.Label>
               <Form.Control
                 as="textarea"
                 value={review.review}
