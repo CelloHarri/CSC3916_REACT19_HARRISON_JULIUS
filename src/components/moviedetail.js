@@ -66,7 +66,7 @@ const MovieDetail = () => {
           ))}
         </Card.Body>
         <Card.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className="text-start">
             <Form.Group>
               <Form.Label className="text-white">Rating (1-5)</Form.Label>
               <Form.Control
